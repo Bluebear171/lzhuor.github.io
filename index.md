@@ -1,8 +1,10 @@
 ## Welcome to John's Home
 
-You can use the [editor on GitHub](https://github.com/lizhuoran1992/lizhuoran1992.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+My site is under renovation 👾! 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I'm a Software Engineer working at StashAway - Singapore's first digital wealth management platform for everyone. I was working for Goldman Sachs (@goldmansachs) [Global Investment Research(GIR)](http://www.goldmansachs.com/careers/why-goldman-sachs/our-divisions/global-investment-research/) and mainly focus on equity research applications. 
+
+My GS GIR life: [😇 http://www.girtech.sg](http://www.girtech.sg)
 
 ### Markdown
 
