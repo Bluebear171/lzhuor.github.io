@@ -1,6 +1,6 @@
 ## Welcome to John's Home
 
-My site is under renovation 👾! ██&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]15%
+My site is under renovation 👾! ██&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]15%
 
 I'm a Software Engineer working at StashAway - Singapore's first digital wealth management platform for everyone. Prior joining this young and energetic team, I was a Technology Analyst for Goldman Sachs ([@goldmansachs](https://github.com/goldmansachs)) - [Global Investment Research(GIR)](http://www.goldmansachs.com/careers/why-goldman-sachs/our-divisions/global-investment-research/) and mainly focus on equity research applications. 
 
