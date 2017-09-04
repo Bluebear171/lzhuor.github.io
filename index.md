@@ -2,7 +2,7 @@
 
 My site is under renovation 👾! 
 
-I'm a Software Engineer working at StashAway - Singapore's first digital wealth management platform for everyone. I was working for Goldman Sachs (@goldmansachs) [Global Investment Research(GIR)](http://www.goldmansachs.com/careers/why-goldman-sachs/our-divisions/global-investment-research/) and mainly focus on equity research applications. 
+I'm a Software Engineer working at StashAway - Singapore's first digital wealth management platform for everyone. I was working for Goldman Sachs ([@goldmansachs](https://github.com/goldmansachs)) - [Global Investment Research(GIR)](http://www.goldmansachs.com/careers/why-goldman-sachs/our-divisions/global-investment-research/) and mainly focus on equity research applications. 
 
 My GS GIR life: [😇 http://www.girtech.sg](http://www.girtech.sg)
 
