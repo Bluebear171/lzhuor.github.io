@@ -1,5 +1,5 @@
 # lzhuor.github.io
-This Sweet Home
+John's sweet home
 
 ## Install Local Dependencies
 ```
