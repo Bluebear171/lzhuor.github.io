@@ -6,7 +6,7 @@
         </div>
 
         <h1>
-            <span class="site-title">[{{site.username}}]</span>
+            <span class="site-title">{{site.username}}</span>
         </h1>
 
         <div class="icons-home">
@@ -20,6 +20,10 @@
 
             <a aria-label="My Github" title="Shxow my projetcts" target="_blank" href="https://github.com/{{site.github_username}}">
                 <svg class="icon icon-github"><use xlink:href="#icon-github-alt"></use></svg>
+            </a>
+
+            <a aria-label="My Twitter" title="Follow me on Twitter" target="_blank" href="https://twitter.com/{{site.twitter_username}}">
+                <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
             </a>
 
             <a aria-label="Use the RSS to get updated" title="Register for my RSS" target="_blank" href="{{ "/feed.xml" | prepend: site.baseurl }}">
