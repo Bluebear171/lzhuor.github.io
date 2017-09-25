@@ -4,10 +4,10 @@ title:  "Hello World, John! 以后聊聊技术，严肃活泼地。"
 image: ''
 date:   2017-09-24 00:00:00
 tags:
-- mongodb
+- life
 description: ''
 categories:
-- Learn Jekyll 
+- Life 
 ---
 
 <p class="music-read"><iframe src="https://open.spotify.com/embed/track/4w2Yq2cklbssmUtUy5Vh6H" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
@@ -53,7 +53,7 @@ GitHub Pages写博专用而且免费提供host（之前自己的server放在AWS 
 
 一开始我是坚决抵触加入创业公司的，因为早期还是想要有一个enterprise水准的开发环境。我印象中小公司的Software Development Life Cycle (SDLC)、代码规范、做事风格总让人觉得颤颤巍巍。总担心自己得不到足够的指导因而不能得到提升。
 但是当时在银行里做开发实在不开心，觉得像个行尸走肉，技术上难有大突破，经常性重复自己。然后问了一下新工作用不用JIRA，有没有DevOps这个环节。他们说用JIRA，有Confluence(wiki)，有Jenkins，不是Trunk base但是是Git workflow。
-然后这边前端是现在流行的React+Redux，后端有Node.js，有MongoD, 有object mapping (mongoose)，还有Scala，Cassandra，Akka这些比较时髦的东西。于是就拍拍脑袋辞职了。记得前一个周五才和可爱的老板去打了板球，接着周一就辞职了，
+然后这边前端是现在流行的React+Redux，后端有Node.js，有MongoDB, 有object mapping (mongoose)，还有Scala，Cassandra，Akka这些比较时髦的东西。于是就拍拍脑袋辞职了。记得前一个周五才和可爱的老板去打了板球，接着周一就辞职了，
 有点尴尬。
 
 总的感受，高盛作为银行业大哥之一，人文和工作环境真的不错，同事们都很professional，很有耐心，做事也负责。自15年暑假实习、16年7月到17年6月的这段回忆总的来说我是非常感激的。
