@@ -1,7 +1,7 @@
 # Site settings
 title: John Li - Software Engineer
 description: "John's sweet home in the Internet world"
-baseurl: "" # for test: remove string '/space-jekyll-templa' to ''
+baseurl: "" # for test: remove string '/space-jekyll-template' to ''
 url: "http://www.zhuoran.li"
 # User settings
 username: John Li
@@ -10,7 +10,7 @@ email: zhuoran666@gmail.com
 linkedin_site_id: john-li-zhuoran
 github_username:  lzhuor
 twitter_username: lzhuor
-disqus_username: lzhuor
+disqus_username: zhuoran
 profile_picture: /assets/img/avatar.png
 
 # Build settings
