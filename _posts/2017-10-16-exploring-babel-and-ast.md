@@ -77,6 +77,8 @@ Nowadays, there are different versions of JavaScript ASTs transformed by differe
 
 The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the list - [babel-types](https://github.com/babel/babel/tree/master/packages/babel-types#babel-types).
 
+Each node `path` has many build-in functions for us to use. Again, we don't have to memorize them. This is the API - [babel-core API](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
+
 Example of **(a)** visiting `MemberExpression ` nodes and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` nodes and converting `<h1>` to `<Title>`:
 ```javascript
 visitor: {
