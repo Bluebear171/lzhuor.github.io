@@ -15,6 +15,7 @@ categories:
 
 <p class="music-read"><iframe src="https://open.spotify.com/embed/track/3ZffCQKLFLUvYM59XKLbVm" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
 
+<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_babel_repl.png">
 ## Introduction to Babel
 [Babel](https://babeljs.io/) is a JavaScript compiler that converts human readable code to machine friendly format named
 Abstract Syntax Tree (AST) to **visit**, **analyze** and possibly **modify** the AST then write AST over files as runtime code. 
@@ -22,7 +23,7 @@ Abstract Syntax Tree (AST) to **visit**, **analyze** and possibly **modify** the
 As JavaScript was initially born for browsers and different browsers possibly understand different JavaScript syntax, the desired runtime code should be compatible across different JavaScript interpreters
 (e.g. IE9 vs Google Chrome, Node.js 6 vs Node.js 8). [caniuse.com](https://caniuse.com/#search=array.isArray) is a tool born for developers to search availability of syntax and build-in functions (Object prototype). [Browserstack](https://www.browserstack.com/) is another tool can be used for browser compatibility testing. 
 
-Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code ([funny breifing on history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
+Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so developers can write code in ES6 which is more intuitive meanwhile clients consume transpiled ES5 code which actually implements the same logic with older syntax but better compatibility ([funny breifing on history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
 
 <img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/babel-transpile.png">
 
@@ -51,7 +52,8 @@ class HelloWorld extends React.Component{
 	}
 }
 ```
-The `import` of `React` looks like below in AST
+
+Before reading subsequent AST examples, please note that parsing source code to AST is "contextless". For example, converting line #1 `import React from 'react'` to AST doesn't require access to the actual `react` package. The parser only abstracts your source code but doesn't do runtime evaluation. 
 
 The assignment of `HELLO_TEXT` as `class property` looks like below in AST 
 <img style="width: 600px" src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_value_assignment.png">
@@ -66,50 +68,86 @@ Nowadays, there are different versions of JavaScript ASTs transformed by differe
 
 The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the list - [babel-types](https://github.com/babel/babel/tree/master/packages/babel-types#babel-types).
 
-Exmaple of visiting `Identifier` type and converting `console` to uppercase:
+Exmaple of **(a)** visiting `MemberExpression ` node type and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` node type and converting `<h1>` to `<Title>`:
 ```javascript
 visitor: {
-  Identifier(path) {
-    if (path.node.name === 'console') {
-    	path.node.name = path.node.name.toUpperCase();
+      MemberExpression(path) {
+        if (path.node.object.name === "console" && path.node.property.name === "log") {
+          path.node.property.name = "debug";
+        }
+      },
+
+      JSXIdentifier(path) {
+        if (path.node.name === "h1") {
+          path.node.name = "Title";
+        }
+      }
     }
-  }
-}
 ```
 
 Generated Code (see next topic):
 ```javascript
-class HelloWorld {
+import React from 'react'; 
+
+class HelloWorld extends React.Component {
 	constructor() {
+      	super();
 		this.HELLO_TEXT = 'Hello World!';
 	}
 	
 	sayHello() {
-		CONSOLE.log(this.HELLO_TEXT) // 'console' is replaced by 'CONSOLE' 
+		console.debug(this.HELLO_TEXT)
+	}
+  
+	render() {
+		return (
+		  <Title> 
+		    {this.HELLO_TEXT}
+		  </Title>
+		);
 	}
 }
 ```
 ### 3. Generate
 ***Finally, Babel generates actual runtime code based on AST***
 
-For example, if we transform an AST of code written in ES6 to an AST of code written in ES5, the output will be:
+For example, if we transform an AST of above example code written in ES6 to an AST of code written in ES5, the output will be:
 ```javascript
-var HelloWorld = function () {
-	function HelloWorld() {
-		_classCallCheck(this, HelloWorld);
+// It's awesome if you're patient for reading below ES5 code. Feel free to skip it.
+var _react = require('react');
 
-		this.HELLO_TEXT = 'Hello World!';
-	}
+var _react2 = _interopRequireDefault(_react);
 
-	_createClass(HelloWorld, [{
-		key: 'sayHello',
-		value: function sayHello() {
-			console.log(this.HELLO_TEXT);
-		}
-	}]);
+var HelloWorld = function (_React$Component) {
+  _inherits(HelloWorld, _React$Component);
 
-	return HelloWorld;
-}();
+  function HelloWorld() {
+      _classCallCheck(this, HelloWorld);
+
+      var _this = _possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this));
+
+      _this.HELLO_TEXT = 'Hello World!';
+      return _this;
+  }
+
+  _createClass(HelloWorld, [{
+      key: 'sayHello',
+      value: function sayHello() {
+        console.debug(this.HELLO_TEXT);
+      }
+  }, {
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(
+          Title,
+          null,
+          this.HELLO_TEXT
+        );
+      }
+  }]);
+
+  return HelloWorld;
+}(_react2.default.Component);
 ```
 
 ## Development/Debug Tool
@@ -117,14 +155,14 @@ var HelloWorld = function () {
 
 <img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_Explorer.png">
 
-You can play around different AST parsers and write you own transform logic. The  AST and generated source code are shown immediately.
+You can play around different AST parsers and write you own transform logic. The  AST and generated source code are shown immediately after updating source code.
 
 ## How is Babel applied in real projects?
 It depends on your use case. It can be applied in the bundler of your build pipeline of a JavaScript project. It can also be applied in a `Node.js` script for code analysis purpose.
 
 Sharing some my own understandings:
 
-- babel plugins are usually applied at bundling system such as Webpack (with [babel-loader](https://github.com/babel/babel-loader)) to resolve JavaScript version compatability issue. You can usually find Babel configuration in `.babelrc` or `package.json`. Example:
+- babel plugins are usually  applied at bundling system such as Webpack (with [babel-loader](https://github.com/babel/babel-loader)) to resolve JavaScript version compatability issue. You can usually find Babel configuration in `.babelrc` or `package.json`. Example:
 ```javascript
 {
     "presets": [
