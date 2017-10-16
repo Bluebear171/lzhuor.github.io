@@ -16,6 +16,7 @@ categories:
 <p class="music-read"><iframe src="https://open.spotify.com/embed/track/3ZffCQKLFLUvYM59XKLbVm" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
 
 <img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_babel_repl.png">
+
 ## Introduction to Babel
 [Babel](https://babeljs.io/) is a JavaScript compiler that converts human readable code to machine friendly format named
 Abstract Syntax Tree (AST) to **visit**, **analyze** and possibly **modify** the AST then write AST over files as runtime code. 
@@ -25,9 +26,9 @@ As JavaScript was initially born for browsers and different browsers possibly un
 
 Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so developers can write code in ES6 which is more intuitive meanwhile clients consume transpiled ES5 code which actually implements the same logic with older syntax but better compatibility ([funny breifing on history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
 
-<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/babel-transpile.png">
-
 We don't have to touch the source code of a babel-plugin during most of time of development. However, to be able to make contributes to Babel community or debug a werid behavior at webapp or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
+
+<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/babel_system.png">
 
 ## Babel is Not Scary. Three Things!
 Babel is not scary. I personally had the fear for Babel months ago, because I thoght I didn't take any compiler course at university so it would be super difficult for me to understand Babel. To resolve [a bug I encountered](https://github.com/yahoo/babel-plugin-react-intl/issues/125) during development, I was forced to check out some YouTube videos and tutorials about the fundamental of JavaScript compiler. Let's explore it together today with practical cases and 
@@ -50,6 +51,14 @@ class HelloWorld extends React.Component{
 	sayHello() {
 		console.log(this.HELLO_TEXT)
 	}
+	
+  	render() {
+		return (
+		  <h1> 
+		    {this.HELLO_TEXT}
+		  </h1>
+		)
+	}
 }
 ```
 
@@ -68,7 +77,7 @@ Nowadays, there are different versions of JavaScript ASTs transformed by differe
 
 The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the list - [babel-types](https://github.com/babel/babel/tree/master/packages/babel-types#babel-types).
 
-Exmaple of **(a)** visiting `MemberExpression ` node type and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` node type and converting `<h1>` to `<Title>`:
+Exmaple of **(a)** visiting `MemberExpression ` nodes and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` nodes and converting `<h1>` to `<Title>`:
 ```javascript
 visitor: {
       MemberExpression(path) {
@@ -85,7 +94,7 @@ visitor: {
     }
 ```
 
-Generated Code (see next topic):
+Result (this is also an exmaple of #3 Generate):
 ```javascript
 import React from 'react'; 
 
@@ -96,10 +105,11 @@ class HelloWorld extends React.Component {
 	}
 	
 	sayHello() {
-		console.debug(this.HELLO_TEXT)
+		console.debug(this.HELLO_TEXT) // 'log()' is replaced by 'debug()'
 	}
   
 	render() {
+		// <h1> is replaced by <Title>
 		return (
 		  <Title> 
 		    {this.HELLO_TEXT}
@@ -113,7 +123,7 @@ class HelloWorld extends React.Component {
 
 For example, if we transform an AST of above example code written in ES6 to an AST of code written in ES5, the output will be:
 ```javascript
-// It's awesome if you're patient for reading below ES5 code. Feel free to skip it.
+// You're awesome if patient for reading below ES5 code. Feel free to skip it.
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -151,7 +161,7 @@ var HelloWorld = function (_React$Component) {
 ```
 
 ## Development/Debug Tool
-[AST Explorer](https://astexplorer.net/#/gist/45ef5b4307ada5b7c88d09ea621ef2a7/f4e7ef11f0650fa10be33a0afef0b54190afc033) is an integrated online tool that is very friendly for beginners as it requires almost 0 setup.
+[AST Explorer](https://astexplorer.net/#/gist/45ef5b4307ada5b7c88d09ea621ef2a7/038c7f557caf002119563a7016d9c855d01d12a6) is an integrated online tool that is very friendly for beginners as it requires almost 0 setup.
 
 <img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_Explorer.png">
 
@@ -192,8 +202,8 @@ const transpiledCode = babel.transformFileSync('./helloWorld.js', {
 
 
 ## Some concerns we may have
-- **"If I use babel to transform ES6 code to ES5 code, will Babel pollute the stack trace of an 
-`Error` object when debugging? It compiles my source code to some code written differently."** 
+- **If we use babel to transform ES6 code to ES5 code, will Babel pollute the stack trace of an 
+`Error` object when debugging? It compiles my source code to some code written differently.** 
 
 The answer is YES. **However**, you don't have to worry about debuggability. `babel-register` module automatically converts back transpiled code in stack trace to original source code with the help of [source-map-support](https://www.npmjs.com/package/source-map-support).
 
@@ -223,3 +233,7 @@ transform-es2015-typeof-symbol
 transform-es2015-unicode-regex
 transform-regenerator
 ```
+
+\- The End -
+
+***Note: All opinions in this post are personal. All images, attachments and code in this post are original from [@John](http://www.zhuoran.li).***
