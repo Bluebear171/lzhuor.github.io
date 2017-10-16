@@ -163,13 +163,13 @@ var HelloWorld = function (_React$Component) {
 ```
 
 ## Development/Debug Tool
-[AST Explorer](https://astexplorer.net/#/gist/45ef5b4307ada5b7c88d09ea621ef2a7/038c7f557caf002119563a7016d9c855d01d12a6) is an integrated online tool that is very friendly for beginners as it requires almost 0 setup.
+[AST Explorer](https://astexplorer.net/#/gist/45ef5b4307ada5b7c88d09ea621ef2a7/038c7f557caf002119563a7016d9c855d01d12a6) is an integrated online tool that is very friendly for beginners as it requires almost 0 setups.
 
 <img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_AST_Explorer.png">
 
-You can play around different AST parsers and write you own transform logic. The  AST and generated source code are shown immediately after updating source code.
+You can play around different AST parsers and write your own transform logic. The  AST and generated source code are shown immediately after updating source code.
 
-## How is Babel applied in real projects?
+## How is Babel applied to real projects?
 It depends on your use case. It can be applied in the bundler of your build pipeline of a JavaScript project. It can also be applied in a `Node.js` script for code analysis purpose.
 
 Sharing some my own understandings:
@@ -188,7 +188,7 @@ Sharing some my own understandings:
 ```
 
 - For projects using babel for code analysis and information extraction, we usually invoke Babel APIs from `babel-core` module as it allows us to parse/transform/generate code programmatically and independently. 
-Example in `Node.js`: 
+An example in `Node.js`: 
 ```javascript
 import * as babel from 'babel-core';
 // Transform 
