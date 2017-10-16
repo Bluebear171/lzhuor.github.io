@@ -169,8 +169,8 @@ var HelloWorld = function (_React$Component) {
 
 You can play around different AST parsers and write your own transform logic. The  AST and generated source code are shown immediately after updating source code.
 
-## How is Babel applied to real projects?
-It depends on your use case. It can be applied in the bundler of your build pipeline of a JavaScript project. It can also be applied in a `Node.js` script for code analysis purpose.
+## How is Babel applied in real projects?
+It depends on your use case. It can be applied in the bundler of your build pipeline of a JavaScript project. It can also be applied to a `Node.js` script for code analysis purpose.
 
 Sharing some my own understandings:
 
