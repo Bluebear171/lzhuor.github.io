@@ -18,25 +18,25 @@ categories:
 <img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_babel_repl.png">
 
 ## Introduction to Babel
-[Babel](https://babeljs.io/) is a JavaScript compiler that converts human readable code to machine friendly format named
+[Babel](https://babeljs.io/) is a JavaScript compiler that converts the human readable code to machine friendly format named
 Abstract Syntax Tree (AST) to **visit**, **analyze** and possibly **modify** the AST then write AST over files as runtime code. 
 
 As JavaScript was initially born for browsers and different browsers possibly understand different JavaScript syntax, the desired runtime code should be compatible across different JavaScript interpreters
-(e.g. IE9 vs Google Chrome, Node.js 6 vs Node.js 8). [caniuse.com](https://caniuse.com/#search=array.isArray) is a tool born for developers to search availability of syntax and build-in functions (Object prototype). [Browserstack](https://www.browserstack.com/) is another tool can be used for browser compatibility testing. 
+(e.g. IE9 vs Google Chrome, Node.js 6 vs Node.js 8). [caniuse.com](https://caniuse.com/#search=array.isArray) is a tool born for developers to search availability of syntax and built-in functions (Object prototype). [Browserstack](https://www.browserstack.com/) is another tool can be used for browser compatibility testing. 
 
-Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so developers can write code in ES6 which is more intuitive meanwhile clients consume transpiled ES5 code which actually implements the same logic with older syntax but better compatibility ([funny brefing on history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
+Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so developers can write code in ES6 which is more intuitive meanwhile clients consume transpiled ES5 code which actually implements the same logic with older syntax but better compatibility ([funny briefing on the history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
 
-We don't have to touch the source code of a babel-plugin during most of time of development. However, to be able to make contributions to Babel community or debug a weird behavior at webapp or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
+We don't have to touch the source code of a babel-plugin during most of the time of development. However, to be able to make contributions to Babel community or debug a weird behavior at web application or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
 
 <img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/babel_system.png">
 
 ## Babel is Not Scary. Three Things!
 Babel is not scary. I personally had the fear for Babel months ago, because I thought I didn't take any compiler course at university so it would be super difficult for me to understand Babel. To resolve [a bug I encountered](https://github.com/yahoo/babel-plugin-react-intl/issues/125) during development, I was forced to check out some YouTube videos and tutorials about the fundamental of JavaScript compiler. Let's explore it together today with practical cases and 
-code. I hope you will gain some insights about the magics happening behind [babel-plugins](https://babeljs.io/docs/plugins/).
+code. I hope you will gain some insights about the magic happening behind [babel-plugins](https://babeljs.io/docs/plugins/).
 John hopes this post could shorten the time you spend on understanding the fundamental stuff.
 
 ### 1. Parse
-***Babel parses source code to AST which is an abstraction of your code for machine.*** Don't worry! To read an AST is NOT scary!  I agree that to understand how to turn code to an AST is probably scary ^_^
+***Babel parses source code to AST which is an abstraction of your code for the machine.*** Don't worry! To read an AST is NOT scary!  I agree that to understand how to turn code to an AST is probably scary ^_^
 
 So what does it look like when parsing JavaScript? Using below ES6 class as an example:
 ```javascript
@@ -77,7 +77,7 @@ Nowadays, there are different versions of JavaScript ASTs transformed by differe
 
 The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the list - [babel-types](https://github.com/babel/babel/tree/master/packages/babel-types#babel-types).
 
-Each node `path` has many build-in functions for us to use. Again, we don't have to memorize them. This is the API - [babel-core API](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
+Each node `path` has many built-in functions for us to use. Again, we don't have to memorize them. This is the API - [babel-core API](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
 
 Example of **(a)** visiting `MemberExpression ` nodes and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` nodes and converting `<h1>` to `<Title>`:
 ```javascript
