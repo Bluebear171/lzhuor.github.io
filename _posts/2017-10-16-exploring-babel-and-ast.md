@@ -15,7 +15,7 @@ categories:
 
 <p class="music-read"><iframe src="https://open.spotify.com/embed/track/3ZffCQKLFLUvYM59XKLbVm" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
 
-<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_babel_repl.png">
+<img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_babel_repl.png">
 
 ## Introduction to Babel
 [Babel](https://babeljs.io/) is a JavaScript compiler that converts human readable code to machine friendly format named
@@ -28,7 +28,7 @@ Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so de
 
 We don't have to touch the source code of a babel-plugin during most of time of development. However, to be able to make contributes to Babel community or debug a weird behavior at webapp or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
 
-<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/babel_system.png">
+<img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/babel_system.png">
 
 ## Babel is Not Scary. Three Things!
 Babel is not scary. I personally had the fear for Babel months ago, because I thought I didn't take any compiler course at university so it would be super difficult for me to understand Babel. To resolve [a bug I encountered](https://github.com/yahoo/babel-plugin-react-intl/issues/125) during development, I was forced to check out some YouTube videos and tutorials about the fundamental of JavaScript compiler. Let's explore it together today with practical cases and 
@@ -65,10 +65,10 @@ class HelloWorld extends React.Component{
 Before reading subsequent AST examples, please note that parsing source code to AST is "contextless". For example, converting line #1 `import React from 'react'` to AST doesn't require access to the actual `react` package. The parser only abstracts your source code but doesn't do runtime evaluation. 
 
 The assignment of `HELLO_TEXT` as `class property` looks like below in AST 
-<img style="width: 600px" src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_value_assignment.png">
+<img style="width: 600px" src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_AST_value_assignment.png">
 
 The class method definition `sayHello()` looks like below in AST
-<img style="width: 650px" src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_class_method.png">
+<img style="width: 650px" src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_AST_class_method.png">
 
 Nowadays, there are different versions of JavaScript ASTs transformed by different parsers. [babylon](https://github.com/babel/babylon) (by Babel) and [espree](https://github.com/eslint/espree) (by eslint) are two popular JavaScript parsers with sophisticated community support. If you understand one of them, the other will be smoothly understood because they are pretty similar. 
 
@@ -163,7 +163,7 @@ var HelloWorld = function (_React$Component) {
 ## Development/Debug Tool
 [AST Explorer](https://astexplorer.net/#/gist/45ef5b4307ada5b7c88d09ea621ef2a7/038c7f557caf002119563a7016d9c855d01d12a6) is an integrated online tool that is very friendly for beginners as it requires almost 0 setup.
 
-<img src="/assets/img/posts/2017-10-08-babel-and-ast-jumpstart/snapshot_AST_Explorer.png">
+<img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/snapshot_AST_Explorer.png">
 
 You can play around different AST parsers and write you own transform logic. The  AST and generated source code are shown immediately after updating source code.
 
