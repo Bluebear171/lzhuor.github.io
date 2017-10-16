@@ -26,13 +26,13 @@ As JavaScript was initially born for browsers and different browsers possibly un
 
 Babel is famous for transpiling ES6 JavaScript code to ES5 JavaScript code so developers can write code in ES6 which is more intuitive meanwhile clients consume transpiled ES5 code which actually implements the same logic with older syntax but better compatibility ([funny brefing on history of JavaScript versions](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)). You can also use Babel to analyze your source code and acquire information. For example, [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl) is a tool for creating multi-language React Web application. It extracts all textual content written in JSX React Component `<FormattedMessage/>` into a JSON file which helps you internationalize your React application easily.
 
-We don't have to touch the source code of a babel-plugin during most of time of development. However, to be able to make contributes to Babel community or debug a weird behavior at webapp or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
+We don't have to touch the source code of a babel-plugin during most of time of development. However, to be able to make contributions to Babel community or debug a weird behavior at webapp or Node.js project, we have to understand Babel. It's not difficult! Let's understand this tool used by thousands of JavaScript developers every day with ♥️
 
 <img src="/assets/img/posts/2017-10-16-exploring-babel-and-ast/babel_system.png">
 
 ## Babel is Not Scary. Three Things!
 Babel is not scary. I personally had the fear for Babel months ago, because I thought I didn't take any compiler course at university so it would be super difficult for me to understand Babel. To resolve [a bug I encountered](https://github.com/yahoo/babel-plugin-react-intl/issues/125) during development, I was forced to check out some YouTube videos and tutorials about the fundamental of JavaScript compiler. Let's explore it together today with practical cases and 
-code. I hope you will gain some insights about the magics happening behind [babel-plugins](https://babeljs.io/docs/plugins/) thousands of projects use every day.
+code. I hope you will gain some insights about the magics happening behind [babel-plugins](https://babeljs.io/docs/plugins/).
 John hopes this post could shorten the time you spend on understanding the fundamental stuff.
 
 ### 1. Parse
