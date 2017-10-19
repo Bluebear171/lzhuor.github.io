@@ -75,11 +75,11 @@ Nowadays, there are different versions of JavaScript ASTs transformed by differe
 ### 2. Transform
 ***Babel traverses AST to explore, analyse or modify AST programmatically***
 
-The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the list - [babel-types](https://github.com/babel/babel/tree/master/packages/babel-types#babel-types).
+The `visitor` pattern is very commonly used to traverse an AST. There are many AST node types you can visit in Babel. You don't have to memorize all of them, this is the description of all `node` types - [babel-types](https://github.com/babel/babel/blob/master/packages/babel-types/README.md).
 
-Each node `path` has many built-in functions for us to use. Again, we don't have to memorize them. This is the API - [babel-core API](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
+Each node `path` has many built-in functions for us to use. Again, we don't have to memorize them. This the API docs - [babel-core API](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
 
-Example of **(a)** visiting `MemberExpression ` nodes and converting `console.log()` to `console.debug()` **(b)** visiting `JSXComponent` nodes and converting `<h1>` to `<Title>`:
+Example of **(a)** visiting `MemberExpression ` nodes and converting `console.log()` to `console.debug()` **(b)** visiting `JSXIdentifier` nodes and converting `<h1>` to `<Title>`:
 ```javascript
 visitor: {
       MemberExpression(path) {
